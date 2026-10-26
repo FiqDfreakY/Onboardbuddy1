@@ -1,0 +1,207 @@
+/* =============================================
+   OnboardBuddy — Custom Styles
+   Tailwind handles most utility classes;
+   this file handles specifics Tailwind can't.
+   ============================================= */
+
+/* ----- Scrollbar (webkit) ----- */
+#chatMessages::-webkit-scrollbar,
+#sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+#chatMessages::-webkit-scrollbar-track,
+#sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+#chatMessages::-webkit-scrollbar-thumb,
+#sidebar::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
+/* ----- Chat bubbles ----- */
+.bubble-agent,
+.bubble-user {
+  max-width: 78%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  word-break: break-word;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.bubble-agent {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #1f2937;
+  border-bottom-left-radius: 4px;
+}
+
+.bubble-user {
+  background: #0F62FE;
+  color: #ffffff;
+  border-bottom-right-radius: 4px;
+  margin-left: auto;
+}
+
+/* ----- Message row wrappers ----- */
+.msg-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.msg-row-user {
+  flex-direction: row-reverse;
+}
+
+/* ----- Avatar initials ----- */
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 0.65rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatar-agent {
+  background: #D0E2FF;
+  color: #0043CE;
+}
+
+.avatar-user {
+  background: #0F62FE;
+  color: #ffffff;
+}
+
+/* ----- Typing indicator dots ----- */
+.typing-dot {
+  width: 7px;
+  height: 7px;
+  background: #94A3B8;
+  border-radius: 50%;
+  display: inline-block;
+  animation: bounce 1.2s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: translateY(0); }
+  40%            { transform: translateY(-6px); }
+}
+
+/* ----- Quick reply chips ----- */
+.chip {
+  background: #EFF6FF;
+  color: #0F62FE;
+  border: 1px solid #BFDBFE;
+  border-radius: 999px;
+  padding: 5px 13px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.chip:hover,
+.chip:focus {
+  background: #0F62FE;
+  color: #ffffff;
+  outline: none;
+}
+
+.chip:focus-visible {
+  outline: 2px solid #0F62FE;
+  outline-offset: 2px;
+}
+
+/* ----- Checklist items ----- */
+.task-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.task-item:hover {
+  background: #F0F4FF;
+}
+
+.task-item input[type="checkbox"] {
+  margin-top: 2px;
+  width: 16px;
+  height: 16px;
+  accent-color: #0F62FE;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.task-item label {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #374151;
+  cursor: pointer;
+}
+
+.task-item.done label {
+  text-decoration: line-through;
+  color: #9CA3AF;
+}
+
+/* ----- Sidebar mobile overlay ----- */
+@media (max-width: 767px) {
+  #sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 280px;
+    z-index: 30;
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+    box-shadow: -4px 0 16px rgba(0,0,0,0.12);
+  }
+
+  #sidebar.open {
+    display: flex;
+    transform: translateX(0);
+  }
+
+  #sidebarOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 29;
+  }
+
+  #sidebarOverlay.open {
+    display: block;
+  }
+}
+
+/* ----- Smooth message fade-in ----- */
+.msg-enter {
+  animation: fadeSlide 0.18s ease forwards;
+}
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ----- Focus-visible ring utility (global) ----- */
+:focus-visible {
+  outline: 2px solid #0F62FE;
+  outline-offset: 2px;
+}

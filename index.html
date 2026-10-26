@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OnboardBuddy — NusaTech</title>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: '#0F62FE',
+            'brand-dark': '#0043CE',
+            'brand-light': '#D0E2FF',
+          },
+          borderRadius: {
+            bubble: '12px',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="bg-gray-50 text-gray-900 font-sans min-h-screen flex flex-col">
+
+  <!-- ===== HEADER ===== -->
+  <header class="bg-brand text-white px-4 py-3 flex items-center gap-3 shadow-md sticky top-0 z-20" role="banner">
+    <div class="w-9 h-9 rounded-full bg-white flex items-center justify-center flex-shrink-0" aria-hidden="true">
+      <span class="text-brand font-bold text-sm">OB</span>
+    </div>
+    <div>
+      <h1 class="font-semibold text-base leading-tight">OnboardBuddy</h1>
+      <p class="text-xs text-blue-200">Asisten Onboarding NusaTech</p>
+    </div>
+    <!-- Mobile sidebar toggle -->
+    <button
+      id="sidebarToggle"
+      class="ml-auto p-2 rounded-bubble hover:bg-brand-dark transition-colors md:hidden"
+      aria-label="Toggle checklist"
+      aria-expanded="false"
+      aria-controls="sidebar"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- ===== MAIN LAYOUT ===== -->
+  <main class="flex flex-1 overflow-hidden max-w-6xl w-full mx-auto" role="main">
+
+    <!-- ===== CHAT AREA ===== -->
+    <section class="flex flex-col flex-1 overflow-hidden" aria-label="Area percakapan">
+
+      <!-- Message list -->
+      <div
+        id="chatMessages"
+        class="flex-1 overflow-y-auto px-4 py-4 space-y-3"
+        role="log"
+        aria-live="polite"
+        aria-label="Pesan percakapan"
+        aria-atomic="false"
+      ></div>
+
+      <!-- Quick reply chips -->
+      <div id="quickReplies" class="px-4 pb-2 flex flex-wrap gap-2" aria-label="Saran pertanyaan cepat" role="group"></div>
+
+      <!-- Input area -->
+      <div class="px-4 py-3 bg-white border-t border-gray-200">
+        <form id="chatForm" class="flex items-center gap-2" aria-label="Kirim pesan" novalidate>
+          <label for="chatInput" class="sr-only">Ketik pertanyaan Anda</label>
+          <input
+            id="chatInput"
+            type="text"
+            placeholder="Ketik pertanyaan Anda…"
+            class="flex-1 border border-gray-300 rounded-bubble px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent"
+            autocomplete="off"
+            aria-required="true"
+          />
+          <button
+            type="submit"
+            class="bg-brand text-white px-4 py-2 rounded-bubble text-sm font-medium hover:bg-brand-dark active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2"
+            aria-label="Kirim pesan"
+          >Kirim</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===== SIDEBAR CHECKLIST ===== -->
+    <aside
+      id="sidebar"
+      class="hidden md:flex flex-col w-72 bg-white border-l border-gray-200 overflow-y-auto"
+      aria-label="Checklist onboarding"
+    >
+      <div class="px-4 py-4 border-b border-gray-200">
+        <h2 class="font-semibold text-sm text-gray-700">Checklist Onboarding</h2>
+
+        <!-- Progress bar -->
+        <div class="mt-2" role="group" aria-label="Progress onboarding">
+          <div class="flex justify-between text-xs text-gray-500 mb-1">
+            <span>Progress</span>
+            <span id="progressLabel" aria-live="polite">0/10</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" id="progressBar" aria-label="Progress onboarding">
+            <div id="progressFill" class="bg-brand h-2 rounded-full transition-all duration-300" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task list -->
+      <ul id="checklistItems" class="px-4 py-3 space-y-2" role="list" aria-label="Daftar tugas onboarding"></ul>
+    </aside>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
